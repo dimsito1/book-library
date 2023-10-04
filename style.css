@@ -16,6 +16,7 @@ body {
     --color: #544E61;
     --purple: #67597A;
     --green: #85BAA1;
+    --light-green: #93d4b6;
     --color-dark:  #443f50;
 
 }
@@ -32,10 +33,16 @@ body {
     width: 3rem;
 }
 
+.menu-btn svg:hover {
+    transition: 1s;
+    height: 3.5rem;
+    width: 3.5rem;
+}
 
 .top {
+    z-index: 1;
     align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
     font-size: 1.3rem;
     background-color: var(--green);
     padding: 1.2rem;
@@ -69,29 +76,115 @@ h3 {
     background-color: var(--dark-green);
 }
 
-.btn{
+.btn {
+	border: none;
+	font: inherit;
     font-weight: 200;
     font-size: 1rem;
     color: #fff;
     background-color: var(--color);
     padding: 5px 20px;
-    border: 2px solid var(--color-dark);
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
     border-radius: 50px;
     transition : 91ms;
-    transform: translateY(0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid var(--color);
+    font-weight: 600;
+}
+
+.menu-btn {
+    width: 104.86px;;
+}
+
+.btn:hover {
+    box-shadow:none;
+    color: white;
+    font-weight: 600;
+    transition : 91ms;
+    padding: 5px 20px;
+    background-color: var(--light-green);
+    border: 2px solid white;
+}
+
+.add {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.add-btn {
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 4px;
+	border: none;
+    border: solid 2px var(--green);
+    font-weight: 600;
+    font-weight: 200;
+    font-size: 1rem;
+    color: #fff;
+    background-color: var(--green);
+    padding: 5px 20px;
+    border-radius: 50px;
+    transition : 91ms;
     display: flex;
     flex-direction: row;
     align-items: center;
     cursor: pointer;
 }
 
-.btn:hover{
+.modal {
+    
+    text-align: center;
+    gap: 5rem;
+    transition: 1s;
+    padding: 1.5rem;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.658);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+    height: 28rem;
+    width: 20rem;
+    z-index: 3;
+    opacity: 0;
+}
+
+.overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.24);
+    z-index: 2;
+}
+
+.add-btn:hover {
+    box-shadow: none;
     font-weight: 600;
     transition : 91ms;
     padding: 5px 20px;
-    transform : translateY(-0px);
     background-color: var(--bg);
-    color: var(--color);
-    border: solid 2px var(--color-dark);
+    color: var(--dark-green);
+    border: solid 2px var(--dark-green);
+}
+
+#addBookForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+ 
+.input {
+    border-radius: 5px;
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    outline: none;
 }
