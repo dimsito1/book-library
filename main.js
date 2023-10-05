@@ -48,21 +48,29 @@ const addBookBtn = document.querySelector(".add");
 const closeBookBtn = document.createElement('button');
 
 function appendBookDiv(newBook) {
+  if (newBook.pages > 999999) {
+    alert('Max pages limit exceeded');
+    return;
+  }
   const bookDiv = document.createElement('div');
   bookDiv.classList.add('book');
-
+  
   const titleP = document.createElement('p');
   titleP.innerText = newBook.title;
   bookDiv.appendChild(titleP);
-
+  titleP.classList.add('title');
+  titleP.classList.add('book-info');
+  
   const authorP = document.createElement('p');
   authorP.innerText = newBook.author;
   bookDiv.appendChild(authorP);
-
+  authorP.classList.add('book-info');
+  
   const pagesP = document.createElement('p');
   pagesP.innerText = newBook.pages;
   bookDiv.appendChild(pagesP);
-
+  pagesP.classList.add('book-info');
+  
   const isReadDiv = document.createElement('div');
   if (newBook.isRead) {
     isReadDiv.innerHTML = 'Read';
@@ -72,12 +80,11 @@ function appendBookDiv(newBook) {
     isReadDiv.classList.add('not-read');
   }
   bookDiv.appendChild(isReadDiv);
-
+  
   const removeBtn = document.createElement('button');
   removeBtn.innerHTML = 'Remove';
   removeBtn.classList.add('remove-btn');
   bookDiv.appendChild(removeBtn);
-
 
   document.querySelector('.book-display').appendChild(bookDiv);
 }
@@ -116,6 +123,7 @@ const openAddBookModal = () => {
   titleInput.type = 'text';
   titleInput.name = 'title';
   titleInput.placeholder = 'Book title';
+  titleInput.maxLength = '30';
   form.appendChild(titleInput);
   
   const authorInput = document.createElement('input');
@@ -123,6 +131,7 @@ const openAddBookModal = () => {
   authorInput.type = 'text';
   authorInput.name = 'author';
   authorInput.placeholder = 'Author';
+  authorInput.maxLength = '30';
   form.appendChild(authorInput);
   
   const pagesInput = document.createElement('input');
@@ -130,6 +139,8 @@ const openAddBookModal = () => {
   pagesInput.type = 'number';
   pagesInput.name = 'pages';
   pagesInput.placeholder = 'Pages';
+  pagesInput.min = '1';
+  pagesInput.max = '99999';
   form.appendChild(pagesInput);
   
   const isReadContainer = document.createElement('div');
@@ -166,7 +177,7 @@ const openAddBookModal = () => {
   overlay.classList.add('overlay');
   modal.classList.add('modal');
   overlay.style.display = 'block';
-  document.querySelector('.screen').insertBefore(overlay, document.querySelector('.screen').firstChild);
+  document.body.insertBefore(overlay, document.body.firstChild);
   document.body.appendChild(modal);
   modal.style.display = 'block';
   overlay.style.opacity = '1';
@@ -176,7 +187,6 @@ const openAddBookModal = () => {
   
   submitBtn.addEventListener('click', handleSubmitForm);
   cancelBtn.addEventListener('click', closeAddBookModal);
-
 }
 
 const closeAddBookModal = () => {
