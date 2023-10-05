@@ -18,6 +18,9 @@ body {
     --green: #85BAA1;
     --light-green: #93d4b6;
     --color-dark:  #443f50;
+    --submit-green: rgba(0, 128, 0, 0.384);
+    --cancel-red: rgba(255, 0, 0, 0.432);
+    --light-red: rgba(255, 149, 135, 0.747);
 
 }
 
@@ -135,7 +138,6 @@ h3 {
 }
 
 .modal {
-    
     text-align: center;
     gap: 5rem;
     transition: 1s;
@@ -146,7 +148,7 @@ h3 {
     left: 50%;
     transform: translate(-50%, -50%);
     position: fixed;
-    height: 28rem;
+    height: 26.5rem;
     width: 20rem;
     z-index: 3;
     opacity: 0;
@@ -187,4 +189,90 @@ h3 {
     font-size: inherit;
     font-weight: inherit;
     outline: none;
+}
+
+.btn-container {
+    height: 2.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 2px solid black;
+    gap: 1rem;
+}
+
+.submit-btn, .cancel-btn {
+    font-size: 1rem;
+    border: none;
+    height: 150%;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    color: white; 
+}
+
+.submit-btn:hover {
+    box-shadow:none;
+    color: white;
+    transition : 91ms;
+    background-color: var(--light-green);
+    border: 2px solid white;
+
+    cursor: pointer;
+}
+
+.cancel-btn:hover {
+    box-shadow:none;
+    color: white;
+    transition : 91ms;
+    background-color: var(--light-red);
+    border: 2px solid white;
+
+    cursor: pointer;
+}
+
+.submit-btn {
+    flex: 4;
+    border: 2px solid var(--submit-green);
+    background-color: var(--submit-green);
+}
+
+.cancel-btn {
+    flex: 2;
+    background-color: var(--cancel-red);
+    border: 2px solid var(--cancel-red);
+}
+
+.read-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-direction: row;
+    align-items: center;
+}
+    
+.checkbox {
+    cursor: pointer;
+    accent-color: white;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.book-display {
+    /* height: 45rem; */
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    border: solid 2px black;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+}
+
+.book {
+     aspect-ratio: 320 / 424; /*40 / 53 */
+    height: 5rem;
+    width: auto;
+    background-color: white;
+    border-radius: 15px;
 }
