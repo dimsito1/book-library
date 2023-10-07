@@ -4,6 +4,7 @@ class Book {
     author = 'Unknown',
     pages = '0',
     isRead = false,
+    bDiv,
     ) {
       this.title = title
       this.author = author
@@ -47,7 +48,16 @@ const overlay = document.createElement('div');
 const addBookBtn = document.querySelector(".add");
 const closeBookBtn = document.createElement('button');
 
+function removeBookDiv(rmBook) {
+  rmBook.bDiv.style.opacity = '0'; // Start the fade-out transition
+  setTimeout(() => {
+    rmBook.bDiv.remove();  // Remove the div after the fade-out completes
+  }, 500);
+  library.removeBook(rmBook); // Remove the book from the library
+}
+
 function appendBookDiv(newBook) {
+  
   if (newBook.pages > 999999) {
     alert('Max pages limit exceeded');
     return;
@@ -85,47 +95,62 @@ function appendBookDiv(newBook) {
   removeBtn.innerHTML = 'Remove';
   removeBtn.classList.add('remove-btn');
   bookDiv.appendChild(removeBtn);
-
+  
+  
+  newBook.bDiv = bookDiv;
   document.querySelector('.book-display').appendChild(bookDiv);
+  
+  setTimeout(() => {
+    bookDiv.style.opacity = '1';
+  }, 20);
+  
+  removeBtn.addEventListener('click' , () => {
+    removeBookDiv(newBook);
+  });
 }
 
 function handleSubmitForm(event) {
   event.preventDefault(); // To prevent the form from submitting
-
+  
   const form = document.getElementById('addBookForm');
-
+  
   console.log("Form:", form);
   console.log("Form Elements:", form.elements);
-
+  
   const newBook = new Book(
-      form.elements.title.value, 
+    form.elements.title.value, 
       form.elements.author.value,
       form.elements.pages.value,
       form.elements.isRead.checked
-  );
-
-  closeAddBookModal();
-  
-  library.addBook(newBook);
-  appendBookDiv(newBook);
-}
-
-const openAddBookModal = () => {
-  const form = document.createElement('form');
-  form.id = 'addBookForm';
-  
-  const h2 = document.createElement('h2');
-  h2.innerText = 'Add new book';
-  form.appendChild(h2);
-  
-  const titleInput = document.createElement('input');
-  titleInput.classList.add('input');
-  titleInput.type = 'text';
-  titleInput.name = 'title';
-  titleInput.placeholder = 'Book title';
-  titleInput.maxLength = '30';
-  form.appendChild(titleInput);
-  
+      );
+      
+      closeAddBookModal();
+      
+      if (library.isInLibrary(newBook)) {
+        alert('Book is already in library.');
+        return;
+      }
+      
+      library.addBook(newBook);
+      appendBookDiv(newBook);
+    }
+    
+    const openAddBookModal = () => {
+      const form = document.createElement('form');
+      form.id = 'addBookForm';
+      
+      const h2 = document.createElement('h2');
+      h2.innerText = 'Add new book';
+      form.appendChild(h2);
+      
+      const titleInput = document.createElement('input');
+      titleInput.classList.add('input');
+      titleInput.type = 'text';
+      titleInput.name = 'title';
+      titleInput.placeholder = 'Book title';
+      titleInput.maxLength = '30';
+      form.appendChild(titleInput);
+      
   const authorInput = document.createElement('input');
   authorInput.classList.add('input');
   authorInput.type = 'text';
