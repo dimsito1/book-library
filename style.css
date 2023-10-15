@@ -49,8 +49,6 @@ body {
     font-size: 1.3rem;
     background-color: var(--green);
     padding: 1.2rem;
-    padding-left: 5rem;
-    padding-right: 5rem;
     display: flex;
     justify-content: space-between;
 }
@@ -62,7 +60,7 @@ body {
 }
 
 h3 {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
 }
 
 .footer {
@@ -259,10 +257,6 @@ h3 {
 }
 
 .book-display {
-    /* height: 45rem; */
-    /* top: 39%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
     margin-top: 2rem;
     width: 64rem;
     transition: all 1s;
@@ -302,7 +296,7 @@ h3 {
 
 .book-info {
     color: black;
-    white-space: normal;   /* ensures the text wraps */
+    white-space: normal;/* ensures the text wraps */
     word-wrap: break-word;
     background-color: rgba(0, 0, 0, 0.068);
 }
@@ -333,3 +327,25 @@ h3 {
     text-transform: uppercase;
     font-weight: 800;
 }
+
+@media (max-width: 690px) {
+    .menu-btn {
+        display: none;
+    }
+    .book-display {
+        width: 300px;
+    }
+
+}
+
+/* @media (max-width: 420px) {
+    .book-display {
+        margin-left: 20px; 
+        margin-right: 20px;
+    }
+    
+    .book-display .book {
+        flex-basis: 100%; 
+        margin-bottom: 20px;
+    }
+} */

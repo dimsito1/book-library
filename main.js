@@ -13,32 +13,42 @@ class Book {
     }
   }
   
-  class Library {
-    constructor() {
-      this.books = []
+class Library {
+  constructor() {
+    if (!(this instanceof Library)) {
+      return new Library();
     }
-    
-    addBook(newBook) {
-      if (!(newBook instanceof Book)) {
-        console.log("Invalid input (addBookToLibrary)");
-        return;
-      }
-      if (!this.isInLibrary(newBook)) {
-        this.books.push(newBook)
-        console.log(newBook);
-      }
+    this.books = []
+  }
+
+  addBook(newBook) {
+    if (!(newBook instanceof Book)) {
+      console.log("Invalid input (addBookToLibrary)");
+      return;
     }
-    
-    removeBook(title) {
-      this.books = this.books.filter((book) => book.title !== title)
+    if (!this.isInLibrary(newBook)) {
+      this.books.push(newBook)
+      console.log(newBook);
     }
-    
-    getBook(title) {
-      return this.books.find((book) => book.title === title)
-    }
-    
-    isInLibrary(newBook) {
-    return this.books.some((book) => book.title === newBook.title)
+  }
+
+  removeBook(title) {
+    return this.books = this.books.filter((book) => book.title !== title);
+  }
+
+  getBook(title) {
+    return this.books.find((book) => book.title === title);
+  }
+
+  isInLibrary(newBook) {
+    return this.books.some((book) => book.title === newBook.title);
+  }
+
+  print() {
+    console.log("Books in library: ");
+    this.books.forEach((book) => {
+      console.log(book, ' ');
+    });
   }
 }
 
@@ -53,7 +63,7 @@ function removeBookDiv(rmBook) {
   setTimeout(() => {
     rmBook.bDiv.remove();  // Remove the div after the fade-out completes
   }, 500);
-  library.removeBook(rmBook); // Remove the book from the library
+  library.removeBook(rmBook.title); // Remove the book from the library
 }
 
 function appendBookDiv(newBook) {
