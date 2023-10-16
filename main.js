@@ -68,10 +68,8 @@ function removeBookDiv(rmBook) {
 
 function appendBookDiv(newBook) {
   
-  if (newBook.pages > 999999) {
-    alert('Max pages limit exceeded');
-    return;
-  }
+  
+  
   const bookDiv = document.createElement('div');
   bookDiv.classList.add('book');
   
@@ -129,28 +127,38 @@ function handleSubmitForm(event) {
   
   const newBook = new Book(
     form.elements.title.value, 
-      form.elements.author.value,
-      form.elements.pages.value,
-      form.elements.isRead.checked
-      );
-      
-      closeAddBookModal();
-      
-      if (library.isInLibrary(newBook)) {
-        alert('Book is already in library.');
-        return;
-      }
-      
-      library.addBook(newBook);
-      appendBookDiv(newBook);
+    form.elements.author.value,
+    form.elements.pages.value,
+    form.elements.isRead.checked
+    );
+    
+    closeAddBookModal();
+    
+    if (newBook.title === '' || newBook.author === '') {
+      alert('Invalid title or author');
+      return;
     }
     
-    const openAddBookModal = () => {
-      const form = document.createElement('form');
-      form.id = 'addBookForm';
-      
-      const h2 = document.createElement('h2');
-      h2.innerText = 'Add new book';
+    if (newBook.pages <= 0 || newBook.pages > 999999) {
+      alert('Pages limit exceeded');
+      return;
+    }
+    
+    if (library.isInLibrary(newBook)) {
+      alert('Book is already in library.');
+      return;
+    }
+    
+    library.addBook(newBook);
+    appendBookDiv(newBook);
+  }
+  
+  const openAddBookModal = () => {
+    const form = document.createElement('form');
+    form.id = 'addBookForm';
+    
+    const h2 = document.createElement('h2');
+    h2.innerText = 'Add new book';
       form.appendChild(h2);
       
       const titleInput = document.createElement('input');
